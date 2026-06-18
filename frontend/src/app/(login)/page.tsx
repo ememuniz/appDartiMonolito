@@ -1,3 +1,4 @@
+// frontend/src/app/(login)/page.tsx
 'use client'
 import styles from './login.module.css'
 import Image from 'next/image'
@@ -14,6 +15,17 @@ export default function Login() {
   
     console.log(email, password)
   }
+
+
+
+
+
+
+
+
+
+
+
 
  //DIVIDE====================================================================//
 

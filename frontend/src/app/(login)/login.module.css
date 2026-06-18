@@ -104,7 +104,7 @@
   color: var(--darti-orange);
   text-decoration: none;
 }
-.links_direcionais a:hover {
+.links_direcionais:hover {
   text-decoration: underline;
   color: var(--darti-blue);
 }

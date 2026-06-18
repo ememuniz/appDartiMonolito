@@ -1,24 +1,28 @@
 .login {
   display: flex;
 }
+/*_ITEM: BANNER*/
 .banner {
   flex: 1; 
   max-width: 900px;
   height: 100vh;
   
 }
+  /*__ITEM: IMAGEM DO BANNER*/
 .banner_image {
   width: 100%;
   height: 100vh;
   background-color: var(--darti-blue);
   background: linear-gradient(135deg, rgba(15, 17, 21, 0.95) 0%, rgba(58, 109, 140, 0.6) 100%), url('https://images.pexels.com/photos/18518321/pexels-photo-18518321.jpeg') center/cover;
 }
+  /*__ITEM: TEXTO DO BANNER*/
 .banner_content {
   position: relative;
   top: -60%;
   left: 10%;
   width: 350px;
 }
+    /*___ITEM: TITULO DO BANNER*/
 .title {
   display: flex;
   flex-direction: column;
@@ -34,10 +38,14 @@
   color: var(--darti-orange);
   filter: none;
 }
+    /*___ITEM: TEXTO DO BANNER*/
 .title p {
   font-size: 1.25em;
   color: var(--text-secondary);
 }
+
+
+/*_ITEM: FORMULARIO*/
 .content {
   flex: 1;
   display: flex;
@@ -47,12 +55,26 @@
   justify-content: center;
   background-color: var(--bg-dark);
 }
+  /*__ITEM: FORMULARIO*/
 .form_container {
   padding: 3rem 4rem;
   background-color: var(--bg-panel);
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
+    /*___ITEM: LOGO*/
+.form_logo_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.form_logo {
+  width: 50%;
+  height: auto;
+  object-fit: contain;
+}
+    /*___ITEM: TITULO DO FORMULARIO*/
 .form_title {
   color: var(--text-primary);
   font-size: 30px;
@@ -64,11 +86,28 @@
   font-size: 11px;
   margin-bottom: 1rem;
 }
+    /*___ITEM: MENSAGEM DE AVISO*/
+.mensagem {
+  color: var(--error-color);
+  font-size: 18px;
+  border: 2px solid var(--error-color);
+  background-color: var(--bg-subpanel);
+  max-width: 350px;
+  box-shadow: 0px 0px 10px 1px var(--error-color);
+  font-weight: 700;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  padding: 10px;
+  text-align: center;
+}
+    /*___ITEM: FORMULARIO*/
 .form {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
+      /*____ITEM: CAMPOS DO FORMULARIO*/
 .label {
   color: var(--text-primary);
   font-size: 12px;
@@ -101,14 +140,7 @@
   font-weight:100;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.links_direcionais {
-  color: var(--darti-orange);
-  text-decoration: none;
-}
-.links_direcionais a:hover {
-  text-decoration: underline;
-  color: var(--darti-blue);
-}
+      /*____ITEM: BOTOES DO FORMULARIO*/
 .button{
   min-height: 40px;
   border-radius: 8px;
@@ -124,16 +156,14 @@
 .button:hover{
   background-color: var(--darti-orange);
 }
-.form_logo_container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1rem;
+      /*____ITEM: LINKS DIRECIONAIS DO FORMULARIO*/
+.links_direcionais {
+  color: var(--darti-orange);
+  text-decoration: none;
 }
-.form_logo {
-  width: 50%;
-  height: auto;
-  object-fit: contain;
+.links_direcionais:hover {
+  text-decoration: underline;
+  color: var(--darti-blue);
 }
 .form_description{
   color: var(--text-secondary);
@@ -148,9 +178,44 @@
     display: none;
   }
 }
-
 @media (max-width: 430px) {
+  .mensagem {
+    max-width: none;
+  }
   .form_container {
     padding: 3rem 1rem;
+    max-width: 360px;
+    margin-top: 1rem;
+  }
+  .input {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 376px) {
+  .mensagem {
+    max-width: none;
+  }
+  .form_container {
+    padding: 3rem 1rem;
+    max-width: 300px;
+    margin-top: 10rem;
+  }
+  .input {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 345px) {
+  .mensagem {
+    max-width: none;
+  }
+  .form_container {
+    padding: 3rem 1rem;
+    max-width: 300px;
+    margin-top: 1rem;
+  }
+  .input {
+    min-width: 0;
   }
 }

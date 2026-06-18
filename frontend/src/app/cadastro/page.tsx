@@ -1,11 +1,25 @@
+// frontend/src/app/cadastro/page.tsx
 'use client'
 import styles from './cadastro.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState, useEffect } from 'react'
 
 
 
 export default function Registro() {
+  const [mensagem, setMensagem] = useState('')
+  
+  //_ITEM: RETIRA A MENSAGEM EM 3 SEGUNDOS //
+  /*useEffect(() => {
+    if (mensagem) {
+      setTimeout(() => {
+        setMensagem('');
+      }, 7000);
+    }
+  }, [mensagem]);
+  */
+
   //_ITEM: HANDLEREGISTRO //
   const handleRegistro = async (formData: FormData) => {
     //__ITEM: DADOS DO FORMULARIO //
@@ -14,9 +28,24 @@ export default function Registro() {
     const convite = formData.get('convite') as string
     const password = formData.get('password') as string
     const confirmPassword = formData.get('confirmPassword') as string
-  
-    console.log('email:', email, 'name:', nome, 'convite:', convite, 'password:', password, 'confirmPassword:', confirmPassword)
+
+
+    if (password !== confirmPassword) {
+      setMensagem('As senhas não coincidem. frefe gegeg grgeg. eg eg eg ');
+      return;
+    }
   }
+
+
+
+
+
+
+
+
+
+
+
 
  //DIVIDE====================================================================//
 
@@ -29,12 +58,12 @@ export default function Registro() {
         </div>
         {/*__ITEM: TEXTO DO BANNER*/ }
         <div className={styles.banner_content}>
-          {/*___ITEM: TITULO*/ }
+          {/*___ITEM: TITULO DO BANNER*/ }
           <div className={styles.title}>
             <h1>Inovação, IA &</h1>
             <span>Humanidade</span>
           </div>
-          {/*___ITEM: TEXTO*/ }
+          {/*___ITEM: TEXTO DO BANNER*/ }
           <p>
             O laboratório multidisciplinar da UFMA onde tecnologia, biotecnologia, inovação social e educação digital convergem para redefinir o futuro.
           </p> 
@@ -49,9 +78,11 @@ export default function Registro() {
           <div className={styles.form_logo_container}>
             <Image src="/logo-darti.png" alt="Logo" className={styles.form_logo} width={100} height={100} />
           </div>
-          {/*___ITEM: TITULO*/ }
+          {/*___ITEM: TITULO DO FORMULARIO*/ }
           <h1 className={styles.form_title}>Criar Conta</h1>
           <p className={styles.form_description}>Insira seus dados e o seu código de convite</p>
+          {/*___ITEM: MENSAGEM DE AVISO*/ }
+          {mensagem && <p className={styles.mensagem}>{mensagem}</p>}
           {/*___ITEM: FORMULARIO*/ }
           <form action={handleRegistro} className={styles.form}>
 
