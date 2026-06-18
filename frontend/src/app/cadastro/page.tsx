@@ -4,21 +4,34 @@ import styles from './cadastro.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+//_ITEM: IMPORTAR FETCHS //
+import { criarUsuario } from '@/services/api' //Criar novos usuários
 
 
 
 export default function Registro() {
+  //_ITEM: VARIAVEIS DE ESTADO //
   const [mensagem, setMensagem] = useState('')
+
+//_ITEM: INTERFACES //
+interface dados {
+  email: string;
+  nome: string;
+  convite: string;
+  password: string;
+  confirmPassword: string;
+}
+
+  
   
   //_ITEM: RETIRA A MENSAGEM EM 3 SEGUNDOS //
-  /*useEffect(() => {
+  useEffect(() => {
     if (mensagem) {
       setTimeout(() => {
         setMensagem('');
       }, 7000);
     }
   }, [mensagem]);
-  */
 
   //_ITEM: HANDLEREGISTRO //
   const handleRegistro = async (formData: FormData) => {
@@ -28,11 +41,24 @@ export default function Registro() {
     const convite = formData.get('convite') as string
     const password = formData.get('password') as string
     const confirmPassword = formData.get('confirmPassword') as string
+    const regexValidaPassword = /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/ // Verifique se a senha tem pelo menos 8 caracteres, uma letra e um número e pode conter outros caracteres ou nao
 
-
+    //__ITEM: VALIDAÇÃO DA SENHA //
     if (password !== confirmPassword) {
       setMensagem('As senhas não coincidem. frefe gegeg grgeg. eg eg eg ');
       return;
+    }
+
+    if (!regexValidaPassword.test(password)) {
+      setMensagem('A senha precisa ter pelo menos 8 caracteres, uma letra e um número');
+      return;
+    }
+
+    try {
+      const response =await criarUsuario(email, nome, convite, password);
+      setMensagem(response.message);
+    } catch (error) {
+      setMensagem('Ocorreu um erro ao criar o usuário: ' + error);
     }
   }
 
