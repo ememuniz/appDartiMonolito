@@ -1,18 +1,21 @@
 'use client'
-import styles from './login.module.css'
+import styles from './cadastro.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 
 
 
 export default function Registro() {
-  //_ITEM: HANDLELOGIN //
+  //_ITEM: HANDLEREGISTRO //
   const handleRegistro = async (formData: FormData) => {
     //__ITEM: DADOS DO FORMULARIO //
     const email = formData.get('email') as string
+    const nome = formData.get('nome') as string
+    const convite = formData.get('convite') as string
     const password = formData.get('password') as string
+    const confirmPassword = formData.get('confirmPassword') as string
   
-    console.log(email, password)
+    console.log('email:', email, 'name:', nome, 'convite:', convite, 'password:', password, 'confirmPassword:', confirmPassword)
   }
 
  //DIVIDE====================================================================//
@@ -47,28 +50,47 @@ export default function Registro() {
             <Image src="/logo-darti.png" alt="Logo" className={styles.form_logo} width={100} height={100} />
           </div>
           {/*___ITEM: TITULO*/ }
-          <h1 className={styles.form_title}>Entrar na plataforma</h1>
-          <p className={styles.form_description}>Use seu email institucional para acessar</p>
+          <h1 className={styles.form_title}>Criar Conta</h1>
+          <p className={styles.form_description}>Insira seus dados e o seu código de convite</p>
           {/*___ITEM: FORMULARIO*/ }
           <form action={handleRegistro} className={styles.form}>
 
+            {/*____ITEM: INPUT DE NOME*/ }
+            <label className={styles.label} htmlFor="nome">NOME COMPLETO</label> 
+            <input
+              className={styles.input}
+              type="text"
+              name="nome"
+              id="nome"
+              placeholder="Digite o seu nome completo"
+              autoFocus
+              required
+            />
+
             {/*____ITEM: INPUT DE EMAIL*/ }
-            <label className={styles.label} htmlFor="email">E-MAIL</label> 
+            <label className={styles.label} htmlFor="email">EMAIL</label> 
             <input
               className={styles.input}
               type="email"
               name="email"
               id="email"
-              placeholder="Digite seu email"
-              autoFocus
+              placeholder="Digite o seu email"
+              required
+            />
+
+            {/*____ITEM: CÓDIGO DE CONVITE*/ }
+            <label className={styles.label} htmlFor="convite">CÓDIGO DE CONVITE</label> 
+            <input
+              className={styles.input}
+              type="text"
+              name="convite"
+              id="convite"
+              placeholder="xxxx-xxxx"
               required
             />
 
             {/*____ITEM: INPUT DE SENHA*/ }
-            <div className={styles.title_password}>
-              <label className={styles.label} htmlFor="password">SENHA</label>
-              <Link href="/recuperar-senha" className={styles.links_direcionais}>Esqueceu sua senha?</Link>
-            </div>
+            <label className={styles.label} htmlFor="password">SENHA</label>
             <input
               className={styles.input}
               type="password"
@@ -78,13 +100,24 @@ export default function Registro() {
               required
             />
 
+            {/*____ITEM: INPUT DE CONFIRMAÇÃO DE SENHA*/ }
+            <label className={styles.label} htmlFor="password_confirmation">CONFIRME SUA SENHA</label> 
+            <input
+              className={styles.input}
+              type="password"
+              name="confirmPassword"
+              id="confirmPassword"
+              placeholder="Confirme sua senha"
+              required
+            />
+
             {/*____ITEM: BOTAO DE ENTRAR*/ }
             <button className={styles.button} type="submit">
-              Entrar
+              Cadastrar
             </button>
 
             {/*____ITEM: LINK DE CADASTRO*/ }
-            <p className={styles.form_description}>Ainda não possui uma conta? <Link href="/cadastro" className={styles.links_direcionais}>Cadastre-se</Link></p>
+            <p className={styles.form_description}>Ja possui cadastro? <Link href="/" className={styles.links_direcionais}>Faça login</Link></p>
           </form>
         </div>
       </div>

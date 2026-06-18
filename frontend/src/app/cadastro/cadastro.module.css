@@ -1,0 +1,156 @@
+.login {
+  display: flex;
+}
+.banner {
+  flex: 1; 
+  max-width: 900px;
+  height: 100vh;
+  
+}
+.banner_image {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--darti-blue);
+  background: linear-gradient(135deg, rgba(15, 17, 21, 0.95) 0%, rgba(58, 109, 140, 0.6) 100%), url('https://images.pexels.com/photos/18518321/pexels-photo-18518321.jpeg') center/cover;
+}
+.banner_content {
+  position: relative;
+  top: -60%;
+  left: 10%;
+  width: 350px;
+}
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: var(--text-primary);
+  gap: 8px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.title span {
+  font-size: 1.95em;
+  color: var(--darti-orange);
+  filter: none;
+}
+.title p {
+  font-size: 1.25em;
+  color: var(--text-secondary);
+}
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-dark);
+}
+.form_container {
+  padding: 3rem 4rem;
+  background-color: var(--bg-panel);
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.form_title {
+  color: var(--text-primary);
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.form_description {
+  color: var(--text-secondary);
+  font-size: 11px;
+  margin-bottom: 1rem;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.label {
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight:100;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 2px;
+}
+.input {
+  min-height: 40px;
+  min-width: 350px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 0 10px;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-subpanel);
+  transition: all 0.3s ease;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--darti-blue);
+  box-shadow: 0 0 0 2px rgba(58, 109, 140, 0.2);
+}
+.title_password {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight:100;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.links_direcionais {
+  color: var(--darti-orange);
+  text-decoration: none;
+}
+.links_direcionais a:hover {
+  text-decoration: underline;
+  color: var(--darti-blue);
+}
+.button{
+  min-height: 40px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-weight: 800; 
+  padding: 0 10px;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  background-color: var(--darti-blue);
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+.button:hover{
+  background-color: var(--darti-orange);
+}
+.form_logo_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.form_logo {
+  width: 50%;
+  height: auto;
+  object-fit: contain;
+}
+.form_description{
+  color: var(--text-secondary);
+  font-size: 11px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+
+@media (max-width: 1350px) {
+  .banner {
+    display: none;
+  }
+}
+
+@media (max-width: 430px) {
+  .form_container {
+    padding: 3rem 1rem;
+  }
+}
