@@ -8,4 +8,6 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/Usuario.js'
+export type * from './models/Convite.js'
 export type * from './commonInputTypes.js'

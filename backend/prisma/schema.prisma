@@ -14,10 +14,24 @@ datasource db {
 }
 
 model Usuario {
-  id              Int             @id @default(autoincrement())
   // id será único para cada e sempre será incrementado
+  // uuid gera um id unico e aleatorio
+  id              String          @id @default(uuid())
+  // um email só pode ter uma conta e é obrigatório
   email           String          @unique
-  // um email só pode ter uma conta 
+  // nome é obrigatório
   nome            String
+  // senha é obrigatória
   senha           String
+  // Data que foi criado pega a data atual
+  createdAt       DateTime        @default(now())
+  // Data de atualização
+  updatedAt       DateTime        @updatedAt
+}
+
+model Convite {
+  id              String          @id @default(uuid())
+  codigo          String          @unique
+  usado           Boolean         @default(false)
+  createdAt       DateTime        @default(now())
 }
