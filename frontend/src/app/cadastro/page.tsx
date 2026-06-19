@@ -35,7 +35,7 @@ interface dados {
 
   //_ITEM: HANDLEREGISTRO //
   const handleRegistro = async (formData: FormData) => {
-    //__ITEM: DADOS DO FORMULARIO //
+    //__ITEM: DADOS //
     const email = formData.get('email') as string
     const nome = formData.get('nome') as string
     const convite = formData.get('convite') as string
@@ -54,20 +54,14 @@ interface dados {
       return;
     }
 
+    //__ITEM: CRIAR NOVO USUARIO //
     try {
-      const response =await criarUsuario(email, nome, convite, password);
+      const response = await criarUsuario(email, nome, convite, password);
       setMensagem(response.message);
     } catch (error) {
       setMensagem('Ocorreu um erro ao criar o usuário: ' + error);
     }
   }
-
-
-
-
-
-
-
 
 
 

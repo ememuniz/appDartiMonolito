@@ -1,0 +1,23 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider     = "prisma-client"  // No Prisma 7, use "prisma-client"
+  output       = "../src/generated/prisma" // Salva dentro do código do Nest
+  moduleFormat = "cjs"            // Força o formato CommonJS compatível com o Nest
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Usuario {
+  id              Int             @id @default(autoincrement())
+  // id será único para cada e sempre será incrementado
+  email           String          @unique
+  // um email só pode ter uma conta 
+  nome            String
+  senha           String
+}
