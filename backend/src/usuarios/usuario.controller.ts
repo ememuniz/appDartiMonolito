@@ -13,7 +13,7 @@ export class UsuarioController {
   //__ITEM: AVISA COM A PROMISE QUE VAI RETORNAR UM OBJETO COM NOME E MENSAGEM
   async registrar(
     @Body() dados: CriarUsuarioDto,
-  ): Promise<{ nome: string; mensagem: string }> {
+  ): Promise<{ nome: string; mensagem: string; papel: string }> {
     const resultado = await this.usuarioService.criarUsuario({
       nome: dados.nome,
       email: dados.email,

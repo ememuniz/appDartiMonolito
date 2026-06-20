@@ -12,6 +12,7 @@ import { criarUsuario } from '@/services/api' //Criar novos usuários
 export default function Registro() {
   //_ITEM: VARIAVEIS DE ESTADO //
   const [mensagem, setMensagem] = useState('')
+  const [sucesso, setSucesso] = useState(false)
 
   
   
@@ -20,6 +21,7 @@ export default function Registro() {
     if (mensagem) {
       setTimeout(() => {
         setMensagem('');
+        setSucesso(false);
       }, 7000);
     }
   }, [mensagem]);
@@ -32,23 +34,24 @@ export default function Registro() {
     const convite = formData.get('convite') as string
     const senha = formData.get('senha') as string
     const confirmsenha = formData.get('confirmsenha') as string
-    const regexValidasenha = /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/ // Verifique se a senha tem pelo menos 8 caracteres, uma letra e um número e pode conter outros caracteres ou nao
+    const regexValidasenha = /^(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$/; // Verifique se a senha tem pelo menos 8 caracteres, uma letra e um número e pode conter outros caracteres ou nao
 
     //__ITEM: VALIDAÇÃO DA SENHA //
     if (senha !== confirmsenha) {
-      setMensagem('As senhas não coincidem. frefe gegeg grgeg. eg eg eg ');
+      setMensagem('As senhas não coincidem.');
       return;
     }
 
     if (!regexValidasenha.test(senha)) {
-      setMensagem('A senha precisa ter pelo menos 8 caracteres, uma letra e um número');
+      setMensagem('A senha precisa ter pelo menos 8 caracteres, uma letra e um númeroggerg');
       return;
     }
 
     //__ITEM: CRIAR NOVO USUARIO //
     try {
       const response = await criarUsuario(email, nome, convite, senha);
-      setMensagem(response.message);
+      setMensagem(response.mensagem);
+      setSucesso(true);
     } catch (error) {
       setMensagem('Ocorreu um erro ao criar o usuário: ' + error);
     }
@@ -93,7 +96,7 @@ export default function Registro() {
           <h1 className={styles.form_title}>Criar Conta</h1>
           <p className={styles.form_description}>Insira seus dados e o seu código de convite</p>
           {/*___ITEM: MENSAGEM DE AVISO*/ }
-          {mensagem && <p className={styles.mensagem}>{mensagem}</p>}
+          {mensagem && <p className={sucesso ? styles.sucesso : styles.mensagem}>{mensagem}</p>}
           {/*___ITEM: FORMULARIO*/ }
           <form action={handleRegistro} className={styles.form}>
 
@@ -135,7 +138,7 @@ export default function Registro() {
             <label className={styles.label} htmlFor="senha">SENHA</label>
             <input
               className={styles.input}
-              type="senha"
+              type="password"
               name="senha"
               id="senha"
               placeholder="Digite sua senha"
@@ -146,7 +149,7 @@ export default function Registro() {
             <label className={styles.label} htmlFor="senha_confirmation">CONFIRME SUA SENHA</label> 
             <input
               className={styles.input}
-              type="senha"
+              type="password"
               name="confirmsenha"
               id="confirmsenha"
               placeholder="Confirme sua senha"

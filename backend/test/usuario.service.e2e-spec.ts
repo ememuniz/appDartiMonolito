@@ -177,12 +177,44 @@ describe('Testes de Usuários', () => {
     expect(respostaCriarUsuario.nome).toBe(undefined);
   });
 
+  it('Deve tentar criar um usuário com um código de convite e o usuario criado deve herdar esse papel', async () => {
+    const jsonEntrada = {
+      email: 'teste2@example.com',
+      nome: 'Teste',
+      convite: '789',
+      senha: 'Senha123456',
+    };
+    const response = await request(app.getHttpServer() as Server)
+      .post('/usuario')
+      .send(jsonEntrada);
+
+    const respostaCriarUsuario = response.body as {
+      mensagem: string;
+      nome: string;
+      papel: string;
+    };
+
+    const papelConvite = await prisma.convite.findUnique({
+      where: { codigo: '789' },
+    });
+
+    expect(response.status).toBe(201);
+    expect(respostaCriarUsuario.papel).toBe(papelConvite?.papel);
+  });
+
   afterAll(async () => {
     await prisma.usuario.deleteMany({
       where: { email: '4iB0U@example.com' },
     });
+    await prisma.usuario.deleteMany({
+      where: { email: 'teste2@example.com' },
+    });
     await prisma.convite.updateMany({
       where: { codigo: '123456' },
+      data: { usado: false },
+    });
+    await prisma.convite.updateMany({
+      where: { codigo: '789' },
       data: { usado: false },
     });
     await app.close();

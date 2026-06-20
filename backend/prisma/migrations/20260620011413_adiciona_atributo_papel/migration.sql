@@ -1,0 +1,8 @@
+-- CreateEnum
+CREATE TYPE "Papel" AS ENUM ('PRESIDENTE', 'VICE_PRESIDENTE', 'DIRETOR', 'MEMBRO', 'EXTERNO');
+
+-- AlterTable
+ALTER TABLE "Convite" ADD COLUMN     "papel" "Papel" NOT NULL DEFAULT 'EXTERNO';
+
+-- AlterTable
+ALTER TABLE "Usuario" ADD COLUMN     "papel" "Papel" NOT NULL DEFAULT 'EXTERNO';

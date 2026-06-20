@@ -27,6 +27,7 @@ export type AggregateConvite = {
 export type ConviteMinAggregateOutputType = {
   id: string | null
   codigo: string | null
+  papel: string | null
   usado: boolean | null
   createdAt: Date | null
 }
@@ -34,6 +35,7 @@ export type ConviteMinAggregateOutputType = {
 export type ConviteMaxAggregateOutputType = {
   id: string | null
   codigo: string | null
+  papel: string | null
   usado: boolean | null
   createdAt: Date | null
 }
@@ -41,6 +43,7 @@ export type ConviteMaxAggregateOutputType = {
 export type ConviteCountAggregateOutputType = {
   id: number
   codigo: number
+  papel: number
   usado: number
   createdAt: number
   _all: number
@@ -50,6 +53,7 @@ export type ConviteCountAggregateOutputType = {
 export type ConviteMinAggregateInputType = {
   id?: true
   codigo?: true
+  papel?: true
   usado?: true
   createdAt?: true
 }
@@ -57,6 +61,7 @@ export type ConviteMinAggregateInputType = {
 export type ConviteMaxAggregateInputType = {
   id?: true
   codigo?: true
+  papel?: true
   usado?: true
   createdAt?: true
 }
@@ -64,6 +69,7 @@ export type ConviteMaxAggregateInputType = {
 export type ConviteCountAggregateInputType = {
   id?: true
   codigo?: true
+  papel?: true
   usado?: true
   createdAt?: true
   _all?: true
@@ -144,6 +150,7 @@ export type ConviteGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 export type ConviteGroupByOutputType = {
   id: string
   codigo: string
+  papel: string
   usado: boolean
   createdAt: Date
   _count: ConviteCountAggregateOutputType | null
@@ -172,6 +179,7 @@ export type ConviteWhereInput = {
   NOT?: Prisma.ConviteWhereInput | Prisma.ConviteWhereInput[]
   id?: Prisma.StringFilter<"Convite"> | string
   codigo?: Prisma.StringFilter<"Convite"> | string
+  papel?: Prisma.StringFilter<"Convite"> | string
   usado?: Prisma.BoolFilter<"Convite"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Convite"> | Date | string
 }
@@ -179,6 +187,7 @@ export type ConviteWhereInput = {
 export type ConviteOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   codigo?: Prisma.SortOrder
+  papel?: Prisma.SortOrder
   usado?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -189,6 +198,7 @@ export type ConviteWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ConviteWhereInput | Prisma.ConviteWhereInput[]
   OR?: Prisma.ConviteWhereInput[]
   NOT?: Prisma.ConviteWhereInput | Prisma.ConviteWhereInput[]
+  papel?: Prisma.StringFilter<"Convite"> | string
   usado?: Prisma.BoolFilter<"Convite"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Convite"> | Date | string
 }, "id" | "codigo">
@@ -196,6 +206,7 @@ export type ConviteWhereUniqueInput = Prisma.AtLeast<{
 export type ConviteOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   codigo?: Prisma.SortOrder
+  papel?: Prisma.SortOrder
   usado?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ConviteCountOrderByAggregateInput
@@ -209,6 +220,7 @@ export type ConviteScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ConviteScalarWhereWithAggregatesInput | Prisma.ConviteScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Convite"> | string
   codigo?: Prisma.StringWithAggregatesFilter<"Convite"> | string
+  papel?: Prisma.StringWithAggregatesFilter<"Convite"> | string
   usado?: Prisma.BoolWithAggregatesFilter<"Convite"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Convite"> | Date | string
 }
@@ -216,6 +228,7 @@ export type ConviteScalarWhereWithAggregatesInput = {
 export type ConviteCreateInput = {
   id?: string
   codigo: string
+  papel?: string
   usado?: boolean
   createdAt?: Date | string
 }
@@ -223,6 +236,7 @@ export type ConviteCreateInput = {
 export type ConviteUncheckedCreateInput = {
   id?: string
   codigo: string
+  papel?: string
   usado?: boolean
   createdAt?: Date | string
 }
@@ -230,6 +244,7 @@ export type ConviteUncheckedCreateInput = {
 export type ConviteUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  papel?: Prisma.StringFieldUpdateOperationsInput | string
   usado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -237,6 +252,7 @@ export type ConviteUpdateInput = {
 export type ConviteUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  papel?: Prisma.StringFieldUpdateOperationsInput | string
   usado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -244,6 +260,7 @@ export type ConviteUncheckedUpdateInput = {
 export type ConviteCreateManyInput = {
   id?: string
   codigo: string
+  papel?: string
   usado?: boolean
   createdAt?: Date | string
 }
@@ -251,6 +268,7 @@ export type ConviteCreateManyInput = {
 export type ConviteUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  papel?: Prisma.StringFieldUpdateOperationsInput | string
   usado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -258,6 +276,7 @@ export type ConviteUpdateManyMutationInput = {
 export type ConviteUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   codigo?: Prisma.StringFieldUpdateOperationsInput | string
+  papel?: Prisma.StringFieldUpdateOperationsInput | string
   usado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -265,6 +284,7 @@ export type ConviteUncheckedUpdateManyInput = {
 export type ConviteCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   codigo?: Prisma.SortOrder
+  papel?: Prisma.SortOrder
   usado?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -272,6 +292,7 @@ export type ConviteCountOrderByAggregateInput = {
 export type ConviteMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   codigo?: Prisma.SortOrder
+  papel?: Prisma.SortOrder
   usado?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -279,6 +300,7 @@ export type ConviteMaxOrderByAggregateInput = {
 export type ConviteMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   codigo?: Prisma.SortOrder
+  papel?: Prisma.SortOrder
   usado?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -292,6 +314,7 @@ export type BoolFieldUpdateOperationsInput = {
 export type ConviteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   codigo?: boolean
+  papel?: boolean
   usado?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["convite"]>
@@ -299,6 +322,7 @@ export type ConviteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 export type ConviteSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   codigo?: boolean
+  papel?: boolean
   usado?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["convite"]>
@@ -306,6 +330,7 @@ export type ConviteSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type ConviteSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   codigo?: boolean
+  papel?: boolean
   usado?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["convite"]>
@@ -313,11 +338,12 @@ export type ConviteSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type ConviteSelectScalar = {
   id?: boolean
   codigo?: boolean
+  papel?: boolean
   usado?: boolean
   createdAt?: boolean
 }
 
-export type ConviteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "codigo" | "usado" | "createdAt", ExtArgs["result"]["convite"]>
+export type ConviteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "codigo" | "papel" | "usado" | "createdAt", ExtArgs["result"]["convite"]>
 
 export type $ConvitePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Convite"
@@ -325,6 +351,7 @@ export type $ConvitePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     codigo: string
+    papel: string
     usado: boolean
     createdAt: Date
   }, ExtArgs["result"]["convite"]>
@@ -752,6 +779,7 @@ export interface Prisma__ConviteClient<T, Null = never, ExtArgs extends runtime.
 export interface ConviteFieldRefs {
   readonly id: Prisma.FieldRef<"Convite", 'String'>
   readonly codigo: Prisma.FieldRef<"Convite", 'String'>
+  readonly papel: Prisma.FieldRef<"Convite", 'String'>
   readonly usado: Prisma.FieldRef<"Convite", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Convite", 'DateTime'>
 }

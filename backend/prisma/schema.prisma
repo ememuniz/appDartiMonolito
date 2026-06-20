@@ -13,6 +13,7 @@ datasource db {
   provider = "postgresql"
 }
 
+
 model Usuario {
   // id será único para cada e sempre será incrementado
   // uuid gera um id unico e aleatorio
@@ -23,6 +24,8 @@ model Usuario {
   nome            String
   // senha é obrigatória
   senha           String
+  // Papel do usuário
+  papel           String          @default("EXTERNO")
   // Data que foi criado pega a data atual
   createdAt       DateTime        @default(now())
   // Data de atualização
@@ -32,6 +35,7 @@ model Usuario {
 model Convite {
   id              String          @id @default(uuid())
   codigo          String          @unique
+  papel           String          @default("EXTERNO")
   usado           Boolean         @default(false)
   createdAt       DateTime        @default(now())
 }

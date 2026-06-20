@@ -1,19 +1,47 @@
 // frontend/src/app/(login)/page.tsx
 'use client'
+import { useState, useEffect } from 'react'
 import styles from './login.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import Cookies from "js-cookie";
+import { fazerLogin } from '@/services/api'
 
 
 
 export default function Login() {
+  const router = useRouter();
+  const [mensagem, setMensagem] = useState('')
+  const [sucesso, setSucesso] = useState(false)
+
+  useEffect(() => {
+    if (mensagem) {
+      setTimeout(() => {
+        setMensagem('');
+        setSucesso(false);
+      }, 7000);
+    }
+  }, [mensagem]);
   //_ITEM: HANDLELOGIN //
   const handleLogin = async (formData: FormData) => {
     //__ITEM: DADOS DO FORMULARIO //
     const email = formData.get('email') as string
-    const password = formData.get('password') as string
-  
-    console.log(email, password)
+    const senha = formData.get('senha') as string
+    
+    try {
+      const response = await fazerLogin(email, senha);
+      //Guarda o token no navegador
+      //O primeiro argumento é o nome da chave
+      //O segundo argumento é o valor da chave
+      //O terceiro argumento é a configuração da chave onde diz que ela vai expirar em 7 dias
+      Cookies.set('token_acesso', response.acess_token, { expires: 7 });
+      router.push(`/dashboard/${response.papel}`);
+    } catch (error) {
+      setMensagem('Ocorreu um erro ao fazer login: ' + error);
+    }
+
+
   }
 
 
@@ -61,6 +89,7 @@ export default function Login() {
           {/*___ITEM: TITULO*/ }
           <h1 className={styles.form_title}>Entrar na plataforma</h1>
           <p className={styles.form_description}>Use seu email institucional para acessar</p>
+          {mensagem && <p className={sucesso ? styles.sucesso : styles.mensagem}>{mensagem}</p>}
           {/*___ITEM: FORMULARIO*/ }
           <form action={handleLogin} className={styles.form}>
 
@@ -84,8 +113,8 @@ export default function Login() {
             <input
               className={styles.input}
               type="password"
-              name="password"
-              id="password"
+              name="senha"
+              id="senha"
               placeholder="Digite sua senha"
               required
             />

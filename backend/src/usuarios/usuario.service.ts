@@ -7,6 +7,7 @@ import {
 // Trás o DTO usado em  controller aqui tbm
 import { CriarUsuarioDto } from './dtos/criar-usuario.dto';
 import { PrismaService } from '../prisma/prisma.service';
+import * as bcrypt from 'bcrypt'; //biblioteca para criptografia
 
 //_ITEM: SERVICE DE USUARIO //
 @Injectable()
@@ -25,19 +26,22 @@ export class UsuarioService {
     //_____ITEM: VERIFICA SE A SENHA TEM 8 CARACTERES COM LETRA E NUMERO
     //_____ITEM: VERIFICA SE O CONVITE EXISTE
     //_____ITEM: VERIFICA SE O CONVITE JA FOI USADO
+    //_____ITEM: PEGA O PAPEL DO CONVITE
     //_____ITEM: VERIFICA SE O EMAIL JA FOI USADO
     //_____ITEM: CADASTRA O USUARIO NO BANCO DE DADOS
     //_____ITEM: RETORNA UM NOME E UMA MENSAGEM
     //_____ITEM: FAZ O USADO DO CONVITE MUDAR PARA TRUE
     //_____ITEM: VARIAVEIS QUE VAO GUARDAR O RETORNO
-    const resposta = { mensagem: '', nome: '' };
+    const resposta = { mensagem: '', nome: '', papel: '' };
     //___ITEM: VERIFICA SE A SENHA TEM 8 CARACTERES COM LETRA E NUMERO
-    const regexValidaPassword = /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    const regexValidaPassword = /^(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$/;
     if (!regexValidaPassword.test(dados.senha)) {
       throw new BadRequestException(
         'A senha precisa ter pelo menos 8 caracteres, uma letra e um número',
       );
     }
+    //___ITEM: FAZ A CRIPTOGRAFIA DA SENHA
+    const senhaCriptografada = await bcrypt.hash(dados.senha, 10);
     //___ITEM: VERIFICA SE O CONVITE EXISTE
     const conviteBd = await this.prisma.convite.findUnique({
       where: {
@@ -51,6 +55,8 @@ export class UsuarioService {
     if (conviteBd.usado) {
       throw new UnauthorizedException('O convite já foi usado');
     }
+    //___ITEM: PEGA O PAPEL DO CONVITE
+    const convitePapel = conviteBd.papel;
     //___ITEM: VERIFICA SE O EMAIL JA FOI USADO
     const emailBd = await this.prisma.usuario.findUnique({
       where: {
@@ -65,11 +71,13 @@ export class UsuarioService {
       data: {
         email: dados.email,
         nome: dados.nome,
-        senha: dados.senha,
+        senha: senhaCriptografada,
+        papel: convitePapel,
       },
     });
     resposta.mensagem = 'Cadastro realizado com sucesso';
     resposta.nome = usuario.nome;
+    resposta.papel = usuario.papel;
     //___ITEM: FAZ O USADO DO CONVITE MUDAR PARA TRUE
     await this.prisma.convite.update({
       where: {
