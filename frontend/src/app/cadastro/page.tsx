@@ -13,15 +13,6 @@ export default function Registro() {
   //_ITEM: VARIAVEIS DE ESTADO //
   const [mensagem, setMensagem] = useState('')
 
-//_ITEM: INTERFACES //
-interface dados {
-  email: string;
-  nome: string;
-  convite: string;
-  password: string;
-  confirmPassword: string;
-}
-
   
   
   //_ITEM: RETIRA A MENSAGEM EM 3 SEGUNDOS //
@@ -39,24 +30,24 @@ interface dados {
     const email = formData.get('email') as string
     const nome = formData.get('nome') as string
     const convite = formData.get('convite') as string
-    const password = formData.get('password') as string
-    const confirmPassword = formData.get('confirmPassword') as string
-    const regexValidaPassword = /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/ // Verifique se a senha tem pelo menos 8 caracteres, uma letra e um número e pode conter outros caracteres ou nao
+    const senha = formData.get('senha') as string
+    const confirmsenha = formData.get('confirmsenha') as string
+    const regexValidasenha = /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/ // Verifique se a senha tem pelo menos 8 caracteres, uma letra e um número e pode conter outros caracteres ou nao
 
     //__ITEM: VALIDAÇÃO DA SENHA //
-    if (password !== confirmPassword) {
+    if (senha !== confirmsenha) {
       setMensagem('As senhas não coincidem. frefe gegeg grgeg. eg eg eg ');
       return;
     }
 
-    if (!regexValidaPassword.test(password)) {
+    if (!regexValidasenha.test(senha)) {
       setMensagem('A senha precisa ter pelo menos 8 caracteres, uma letra e um número');
       return;
     }
 
     //__ITEM: CRIAR NOVO USUARIO //
     try {
-      const response = await criarUsuario(email, nome, convite, password);
+      const response = await criarUsuario(email, nome, convite, senha);
       setMensagem(response.message);
     } catch (error) {
       setMensagem('Ocorreu um erro ao criar o usuário: ' + error);
@@ -141,23 +132,23 @@ interface dados {
             />
 
             {/*____ITEM: INPUT DE SENHA*/ }
-            <label className={styles.label} htmlFor="password">SENHA</label>
+            <label className={styles.label} htmlFor="senha">SENHA</label>
             <input
               className={styles.input}
-              type="password"
-              name="password"
-              id="password"
+              type="senha"
+              name="senha"
+              id="senha"
               placeholder="Digite sua senha"
               required
             />
 
             {/*____ITEM: INPUT DE CONFIRMAÇÃO DE SENHA*/ }
-            <label className={styles.label} htmlFor="password_confirmation">CONFIRME SUA SENHA</label> 
+            <label className={styles.label} htmlFor="senha_confirmation">CONFIRME SUA SENHA</label> 
             <input
               className={styles.input}
-              type="password"
-              name="confirmPassword"
-              id="confirmPassword"
+              type="senha"
+              name="confirmsenha"
+              id="confirmsenha"
               placeholder="Confirme sua senha"
               required
             />
