@@ -1,0 +1,15 @@
+.dashboard {
+  display: flex;
+  background-color: #ff0000;
+  min-height: 100vh;
+}
+.navigate {
+  min-width: 400px;
+  background-color: #0d5cac;
+}
+.content {
+  display: flex;
+  padding: 50px;
+  width: 100%;
+  background-color: #01c618;
+}

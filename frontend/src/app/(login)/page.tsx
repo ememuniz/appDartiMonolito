@@ -32,10 +32,7 @@ export default function Login() {
     
     try {
       const response = await fazerLogin(email, senha);
-      //Guarda o token no navegador
-      //O primeiro argumento é o nome da chave
-      //O segundo argumento é o valor da chave
-      //O terceiro argumento é a configuração da chave onde diz que ela vai expirar em 7 dias
+      // Guarda nos cookies e não no localStorage, é melhor pra acessar no front e no back
       Cookies.set('token_acesso', response.acess_token, { expires: 7 });
       const papelLowerCase = (response.papel).toLowerCase(); 
       router.push(`/dashboard/${papelLowerCase}`);
