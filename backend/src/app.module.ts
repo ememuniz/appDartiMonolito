@@ -12,7 +12,9 @@ import { JwtModule } from '@nestjs/jwt';
     UsuarioModule,
     JwtModule.register({
       global: true,
-      secret: process.env.JWT_SECRET || 'CHAVE_SUPER_SECRETA_DO_DARTILAB',
+      secret:
+        process.env.JWT_SECRET ||
+        'uma_chave_super_secreta_e_segura_de_sua_escolha_123!',
       signOptions: { expiresIn: '1d' },
     }),
   ],

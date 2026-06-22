@@ -3,6 +3,7 @@ import {
   UnauthorizedException,
   ConflictException,
   BadRequestException,
+  NotFoundException,
 } from '@nestjs/common';
 // Trás o DTO usado em  controller aqui tbm
 import { CriarUsuarioDto } from './dtos/criar-usuario.dto';
@@ -136,9 +137,10 @@ export class UsuarioService {
     }
     //___ITEM: PREPARA AS INFORMAÇÕES LIGADAS AO TOKEN
     const payload = {
-      sub: usuario.id,
+      id: usuario.id,
       email: usuario.email,
       papel: usuario.papel,
+      nome: usuario.nome,
     };
     return {
       nome: usuario.nome,
@@ -146,5 +148,24 @@ export class UsuarioService {
       papel: usuario.papel,
       acess_token: this.jwtService.sign(payload),
     };
+  }
+
+  async buscarPorId(id: string) {
+    const usuario = await this.prisma.usuario.findUnique({
+      where: {
+        id: id,
+      },
+      select: {
+        id: true,
+        email: true,
+        nome: true,
+        papel: true,
+      },
+    });
+
+    if (!usuario) {
+      throw new NotFoundException('Usuário não encontrado');
+    }
+    return usuario;
   }
 }
