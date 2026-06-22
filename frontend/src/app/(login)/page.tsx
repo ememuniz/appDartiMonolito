@@ -28,6 +28,7 @@ export default function Login() {
     //__ITEM: DADOS DO FORMULARIO //
     const email = formData.get('email') as string
     const senha = formData.get('senha') as string
+
     
     try {
       const response = await fazerLogin(email, senha);
@@ -36,12 +37,14 @@ export default function Login() {
       //O segundo argumento é o valor da chave
       //O terceiro argumento é a configuração da chave onde diz que ela vai expirar em 7 dias
       Cookies.set('token_acesso', response.acess_token, { expires: 7 });
-      router.push(`/dashboard/${response.papel}`);
+      const papelLowerCase = (response.papel).toLowerCase(); 
+      router.push(`/dashboard/${papelLowerCase}`);
+      setSucesso(true);
+      setMensagem(response.mensagem);
     } catch (error) {
+      
       setMensagem('Ocorreu um erro ao fazer login: ' + error);
     }
-
-
   }
 
 

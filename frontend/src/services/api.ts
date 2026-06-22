@@ -13,7 +13,7 @@ export async function criarUsuario(email: string, nome: string, convite: string,
 
 
 export async function fazerLogin(email: string, senha: string) {
-  const response = await fetch(`${API_URL}/login`, {
+  const response = await fetch(`${API_URL}/usuario/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -21,7 +21,10 @@ export async function fazerLogin(email: string, senha: string) {
     body: JSON.stringify({ email: email, senha: senha }),
   }); 
 
+  
+  
   if (!response.ok) {
+    console.log('debug - chegou aqui no deu errado no front');
     const errorData = await response.json().catch(() => ({}));
     throw new Error(errorData.message || 'Email ou senha incorretos');
   }

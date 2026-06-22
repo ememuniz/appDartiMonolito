@@ -6,13 +6,18 @@ import {
 } from '@nestjs/common';
 // Trás o DTO usado em  controller aqui tbm
 import { CriarUsuarioDto } from './dtos/criar-usuario.dto';
+import { LoginDto } from './dtos/login.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt'; //biblioteca para criptografia
+import { JwtService } from '@nestjs/jwt';
 
 //_ITEM: SERVICE DE USUARIO //
 @Injectable()
 export class UsuarioService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly jwtService: JwtService,
+  ) {}
   //__ITEM: CRIA USUÁRIO
   //__ITEM: NO CONTROLLER, PEGAMOS OS DADOS NO @BODY
   //__ITEM: DEPOIS VALIDAMOS NO DTO
@@ -90,5 +95,56 @@ export class UsuarioService {
     await Promise.resolve();
     //___ITEM: RETORNA UM NOME E UMA MENSAGEM
     return resposta;
+  }
+
+  //__ITEM: LOGAR USUARIO
+  //__ITEM: NO CONTROLLER, PEGAMOS OS DADOS NO @BODY
+  //__ITEM: DEPOIS VALIDAMOS NO DTO
+  //__ITEM: CHAMAMOS A FUNÇÃO LOGIN DO SERVICE E PASSAMOS O @BODY COMO PARAMETRO
+  //__ITEM: EXECUTAMOS A FUNÇÃO LOGIN NO SERVICE
+  //__ITEM: RETORNAMOS O RESULTADO NO SERVICE - NOME, MENSAGEM, PAPEL E TOKEN
+  //__ITEM: RETORNAMOS O RESULTADO NO CONTROLLER - NOME, MENSAGEM, PAPEL E TOKEN
+  //__ITEM: O RETORNO DO CONTROLLER É PASSADO PARA O CLIENTE NO FRONT
+  async login(dados: LoginDto): Promise<{
+    nome: string;
+    mensagem: string;
+    papel: string;
+    acess_token: string | null;
+  }> {
+    //____ITEM: O QUE ESSA FUNÇÃO TEM QUE FAZER
+    //_____ITEM: BUSCA O USUÁRIO PELO EMAIL
+    //_____ITEM: AVISA SE O USUARIO NÃO EXISTE
+    //_____ITEM: COMPARA A SENHA DIGITADA COM O HASH DO BANCO DE DADOS
+    //_____ITEM: PREPARA AS INFORMAÇÕES LIGADAS AO TOKEN
+    //___ITEM: RETORNA O NOME, MENSAGEM, PAPEL E TOKEN
+    //____ITEM: FIM DOS REQUISITOS
+
+    //___ITEM: BUSCA O USUARIO PELO EMAIL
+    const usuario = await this.prisma.usuario.findUnique({
+      where: {
+        email: dados.email,
+      },
+    });
+    //___ITEM: AVISA SE O USUARIO NAO EXISTE
+    if (!usuario) {
+      throw new UnauthorizedException('Email ou senha incorretos');
+    }
+    //___ITEM: COMPARA A SENHA DIGITADA COM O HASH DO BANCO DE DADOS
+    const senhaCorreta = await bcrypt.compare(dados.senha, usuario.senha);
+    if (!senhaCorreta) {
+      throw new UnauthorizedException('Email ou senha incorretos');
+    }
+    //___ITEM: PREPARA AS INFORMAÇÕES LIGADAS AO TOKEN
+    const payload = {
+      sub: usuario.id,
+      email: usuario.email,
+      papel: usuario.papel,
+    };
+    return {
+      nome: usuario.nome,
+      mensagem: 'Login realizado com sucesso',
+      papel: usuario.papel,
+      acess_token: this.jwtService.sign(payload),
+    };
   }
 }
