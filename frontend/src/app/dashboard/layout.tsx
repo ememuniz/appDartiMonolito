@@ -43,10 +43,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     void carregarPerfil();
   }, [router]);
 
-  
+  if (carregando) {
+    return <div className={styles.loading}>Carregando dados do painel...</div>;
+  }
   return (
     <div className={styles.dashboard}>
-      <aside className={styles.navigate}>{usuario?.nome}</aside>
+      <aside className={styles.navigate}>{usuario?.nome} {usuario?.papel} {usuario?.email} {usuario?.id} </aside>
       <div className={styles.content}>{children}</div>
     </div>
   )
