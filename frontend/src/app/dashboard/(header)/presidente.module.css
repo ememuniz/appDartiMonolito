@@ -1,0 +1,10 @@
+/* _ITEM: HEADER */
+.cabecalho {
+  height: 100px;
+  width: 100%;
+}
+.main {
+  background-color: #eede29;
+  height: 100%;
+  width: 100%;
+}

@@ -1,15 +1,136 @@
+/* _ITEM: TELA INTEIRA */
 .dashboard {
   display: flex;
-  background-color: #ff0000;
-  min-height: 100vh;
+  background-color: var(--bg-dark);
 }
+/* __ITEM: COLUNA ESQUERDA */
 .navigate {
-  min-width: 400px;
-  background-color: #0d5cac;
-}
-.content {
+  width: 350px;
+  min-height: 100vh;
+  padding:0.6rem 2rem 2rem 2rem;
   display: flex;
-  padding: 50px;
+  flex-direction: column;
+  background-color: var(--bg-panel); 
+}
+/* ___ITEM: LOGO */
+.logo {
+  align-self: center;
   width: 100%;
-  background-color: #01c618;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+/* ___ITEM: LISTA COMPLETA */
+.lista {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: 1rem;
+}
+/* ____ITEM: MENU */
+.menu {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+/* _____ITEM: ITENS DO MENU */
+.acessoPagina {
+  font-size: 1.4rem;
+  font-weight: lighter;
+  text-decoration: none;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: column;
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 0.6rem;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.acessoPagina:hover::after{
+  content: ""; 
+  position: absolute;
+  bottom: 0;   
+  left: 50%;   
+  transform: translateX(-50%); 
+  width: 90px;          
+  height: 2px;          
+  background-color: #ffffff4d; 
+  border-radius: 2px;
+}
+.paginaAcessada {
+  position: relative;
+  font-size: 1.4rem;
+  font-weight: lighter;
+  text-decoration: none;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: column;
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 0.6rem;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+.paginaAcessada::after {
+  content: ""; 
+  position: absolute;
+  bottom: 0;   
+  left: 50%;   
+  transform: translateX(-50%); 
+  width: 90px;          
+  height: 2px;          
+  background-color: #ffffff4d; 
+  border-radius: 2px;   
+}
+.paginaDesabilitada {
+  display: none;
+}
+/* ____ITEM: SAIR */
+.sair {
+  font-size: 1.4rem;
+  font-weight: lighter;
+  text-decoration: none;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 0.6rem;
+  transition: all 0.3s ease;
+  flex-direction: column;
+  margin-bottom: 3rem;
+  position: relative;
+}
+.sair:hover::after{
+  content: ""; 
+  position: absolute;
+  bottom: 0;   
+  left: 50%;   
+  transform: translateX(-50%); 
+  width: 90px;          
+  height: 2px;          
+  background-color: #ffffff4d; 
+  border-radius: 2px;
+}
+
+
+
+
+
+/*_ITEM: CSS QUE COMPORTA TODOS O LAYOUT DO PRESIDENTE */
+.body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  /* background-color: #01c618; */
 }

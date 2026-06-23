@@ -21,10 +21,10 @@
   padding: 0;
   margin: 0;
 }
-
+html,
 body {
   font-family: 'Inter', sans-serif;
-  background-color: var(--bg-dark);
+  background-color: var(--darti-orange);
   color: var(--text-primary);
-  min-height: 100vh;
+  height: 100%;
 }

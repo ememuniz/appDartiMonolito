@@ -37,7 +37,7 @@ export default function Login() {
       // Guarda nos cookies e não no localStorage, é melhor pra acessar no front e no back
       Cookies.set('token_acesso', token, { expires: 7 });
       const papelLowerCase = (response.papel).toLowerCase(); 
-      router.push(`/dashboard/${papelLowerCase}`);
+      router.push(`/dashboard/${papelLowerCase}/home`);
       setSucesso(true);
       setMensagem(response.mensagem);
     } catch (error) {
